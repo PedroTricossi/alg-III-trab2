@@ -13,17 +13,14 @@ int main(void)
 
     while (continuar == 'y')
     { /* na verdade, tem que dar um jeito disso ler um arquivo ate o final */
-        printf("Digite o comando para árvore:");
-        scanf("%c", &comando);
-        printf("comando = %c\n", comando);
-        printf("digite a árvore chave:");
-        scanf("%s", bonsai);
-        printf("leu bonsai\n");
+        printf("Digite o comando para árvore: ");
+        scanf(" %c", &comando);
+        printf("digite a árvore chave: ");
+        scanf(" %s", bonsai);
 
         switch (comando)
         {
         case 'i':
-            printf("entrou no case switch\n");
             inclui(raiz, bonsai);
             break;
         case 'b':
@@ -33,8 +30,8 @@ int main(void)
             exclui((busca(raiz, soma_entrada(bonsai))), raiz);
             break;
         }
-        printf("continuar? (y/n): \n");
-        scanf("%c", &continuar);
+        printf("continuar? (y/n): ");
+        scanf(" %c", &continuar);
     }
     /*emordem(raiz);*/
 

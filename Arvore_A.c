@@ -30,7 +30,6 @@ struct tNo_B *inclui_B(struct tNo_B *no, int c)
 
 int chars_para_int(const char *str, int *indice)
 {
-    printf("transformando chars em int\n");
     char numero[10];
     int i;
     for (i = 0; str[*indice] > 47; i++)
@@ -44,13 +43,18 @@ int chars_para_int(const char *str, int *indice)
 
 struct tNo_B *montaarvore_B(const char *str)
 {
-    printf("montando arvore b\n");
     struct tNo_B *raiz = NULL;
-    int i = 0;
+    int i = 1; /* o "0" seria o primeiro "(" */
     raiz = inclui_B(NULL, chars_para_int(str, &i));
+    while(str[i] == ')' || str[i] == '(') /* pra passar para o proximo numero na string, nao parentese */
+            i++;
+
     while (str[i] != '\0')
     {
         inclui_B(raiz, chars_para_int(str, &i));
+
+        while(str[i] == ')' || str[i] == '(')
+            i++;
     }
     return raiz;
 }
@@ -61,7 +65,7 @@ int soma_arvore(struct tNo_B *no)
     if (no == NULL)
         return 0;
 
-    return (no->chave + soma_arvore(no->esq) + soma_arvore(no->esq));
+    return (no->chave + soma_arvore(no->esq) + soma_arvore(no->dir));
 }
 
 int soma_entrada(char *bonsai)
@@ -85,9 +89,7 @@ struct tNo_A *criaNo(struct tNo_B *chave)
 {
     struct tNo_A *n = (struct tNo_A *)malloc(sizeof(struct tNo_A));
 
-    int valor_bonsai;
-    valor_bonsai = soma_arvore(chave);
-    printf("O valor da chave é: %d", valor_bonsai);
+    printf("soma da arvore: %d\n", soma_arvore(chave));
 
     n->chave = chave;
     n->esq = NULL;
@@ -98,7 +100,6 @@ struct tNo_A *criaNo(struct tNo_B *chave)
 
 struct tNo_A *inclui(struct tNo_A *no, char *bonsai)
 {
-    printf("entrou no inclui\n");
     if (no == NULL)
         return criaNo(montaarvore_B(bonsai));
     if (soma_entrada(bonsai) < soma_arvore(no->chave)) /* se a arvore sendo incluida tiver soma menor que a arvore no no atual */
