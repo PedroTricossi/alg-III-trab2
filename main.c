@@ -15,12 +15,15 @@ int main(void)
     { /* na verdade, tem que dar um jeito disso ler um arquivo ate o final */
         printf("Digite o comando para árvore:");
         scanf("%c", &comando);
+        printf("comando = %c\n", comando);
         printf("digite a árvore chave:");
         scanf("%s", bonsai);
+        printf("leu bonsai\n");
 
         switch (comando)
         {
         case 'i':
+            printf("entrou no case switch\n");
             inclui(raiz, bonsai);
             break;
         case 'b':
