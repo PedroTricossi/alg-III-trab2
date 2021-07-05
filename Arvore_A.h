@@ -24,15 +24,11 @@ int soma_entrada(char *bonsai);
 
 struct tNo_A *criaNo(struct tNo_B *chave);
 
-struct tNo_A *inclui(struct tNo_A *no, struct tNo_B *bonsai);
+struct tNo_A *inclui(struct tNo_A *no, char *bonsai);
 
 int token_to_num(const char *str, int *indice);
 
-struct tNo_A *montaarvore(const char *str);
-
-void visita(struct tNo_A *no);
-
-void emordem(struct tNo_A *no);
+struct tNo_A *montaarvore(char *str);
 
 struct tNo_A *busca(struct tNo_A *no, int chave);
 
@@ -43,5 +39,3 @@ struct tNo_A *sucessor(struct tNo_A *no);
 void ajustaNoPai(struct tNo_A *no, struct tNo_A *novo);
 
 struct tNo_A *exclui(struct tNo_A *no, struct tNo_A *raiz);
-
-void imprime(const char *str, struct tNo_A *no);

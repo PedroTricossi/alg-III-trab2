@@ -17,13 +17,13 @@ struct tNo_B *inclui_B(struct tNo_B *no, int c)
         return criaNo_B(c);
     if (c < no->chave)
     {
-        no->esq = inclui(no->esq, c);
-        // no->esq->pai = no;
+        no->esq = inclui_B(no->esq, c);
+        /* no->esq->pai = no; */
     }
     else
     {
-        no->dir = inclui(no->dir, c);
-        // no->dir->pai = no;
+        no->dir = inclui_B(no->dir, c);
+        /* no->dir->pai = no; */
     }
     return no;
 }
@@ -32,9 +32,10 @@ int chars_para_int(const char *str, int *indice)
 {
     char numero[10];
     int i;
-    for(i=0;str[*indice]>47;i++){
+    for (i = 0; str[*indice] > 47; i++)
+    {
         numero[i] = str[*indice];
-        *indice++;
+        (*indice)++;
     }
     numero[i] = '\0';
     return atoi(numero);
@@ -47,24 +48,28 @@ struct tNo_B *montaarvore_B(const char *str)
     raiz = inclui_B(NULL, chars_para_int(str, &i));
     while (str[i] != '\0')
     {
-        inclui(raiz, chars_para_int(str, &i));
+        inclui_B(raiz, chars_para_int(str, &i));
     }
     return raiz;
 }
 
-int soma_arvore(struct tNo_B *no){
-    // soma os numeros nos nós da arvore contida
-    if(no == NULL)
+int soma_arvore(struct tNo_B *no)
+{
+    /* soma os numeros nos nós da arvore contida */
+    if (no == NULL)
         return 0;
-    
+
     return (no->chave + soma_arvore(no->esq) + soma_arvore(no->esq));
 }
 
-int soma_entrada(char *bonsai){
+int soma_entrada(char *bonsai)
+{
     int i = 0;
     int soma = 0;
-    while(bonsai[i] != '\0'){
-        if(bonsai[i] > 47){ /* se for um numero */
+    while (bonsai[i] != '\0')
+    {
+        if (bonsai[i] > 47)
+        { /* se for um numero */
             soma += chars_para_int(bonsai, &i);
         }
         else
@@ -77,6 +82,11 @@ int soma_entrada(char *bonsai){
 struct tNo_A *criaNo(struct tNo_B *chave)
 {
     struct tNo_A *n = (struct tNo_A *)malloc(sizeof(struct tNo_A));
+
+    int valor_bonsai;
+    valor_bonsai = soma_arvore(chave);
+    printf("O valor da chave é: %d", valor_bonsai);
+
     n->chave = chave;
     n->esq = NULL;
     n->dir = NULL;
@@ -84,11 +94,11 @@ struct tNo_A *criaNo(struct tNo_B *chave)
     return n;
 }
 
-struct tNo_A *inclui(struct tNo_A *no, struct tNo_B *bonsai)
+struct tNo_A *inclui(struct tNo_A *no, char *bonsai)
 {
     if (no == NULL)
         return criaNo(montaarvore_B(bonsai));
-    if (soma_entrada(bonsai) < soma_arvore(no->chave)) // se a arvore sendo incluida tiver soma menor que a arvore no no atual
+    if (soma_entrada(bonsai) < soma_arvore(no->chave)) /* se a arvore sendo incluida tiver soma menor que a arvore no no atual */
     {
         no->esq = inclui(no->esq, bonsai);
         no->esq->pai = no;
@@ -116,31 +126,16 @@ int token_to_num(const char *str, int *indice)
     return atoi(token);
 }
 
-struct tNo_A *montaarvore(const char *str)
+struct tNo_A *montaarvore(char *str)
 {
     struct tNo_A *raiz = NULL;
     int i = 0;
-    raiz = inclui(NULL, token_to_num(str, &i));
+    raiz = inclui(NULL, str);
     while (str[i] != '\0')
     {
-        inclui(raiz, token_to_num(str, &i));
+        inclui(raiz, str);
     }
     return raiz;
-}
-
-void visita(struct tNo_A *no)
-{
-    printf("%d.", no->chave);
-}
-
-void emordem(struct tNo_A *no)
-{
-    if (no != NULL)
-    {
-        emordem(no->esq);
-        visita(no);
-        emordem(no->dir);
-    }
 }
 
 struct tNo_A *busca(struct tNo_A *no, int chave)
@@ -148,9 +143,9 @@ struct tNo_A *busca(struct tNo_A *no, int chave)
     if (no == NULL)
         return NULL;
 
-    if (no->chave == chave)
+    if (soma_arvore(no->chave) == chave)
         return no;
-    if (chave < no->chave)
+    if (chave < soma_arvore(no->chave))
         return busca(no->esq, chave);
     else
         return busca(no->dir, chave);
@@ -222,14 +217,4 @@ struct tNo_A *exclui(struct tNo_A *no, struct tNo_A *raiz)
         }
     }
     return novaRaiz;
-}
-
-void imprime(const char *str, struct tNo_A *no)
-{
-    printf("||%s ", str);
-    if (no != NULL)
-        printf("[ %d ]", no->chave);
-    else
-        printf("Não");
-    printf("Encontrado\n");
 }
