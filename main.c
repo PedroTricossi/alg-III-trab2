@@ -8,30 +8,36 @@ int main(void)
 
     char comando;
     char bonsai[100];
+    char *ptr_bonsai;
+    size_t len;
 
-    do
+    ptr_bonsai = bonsai;
+
+    while ((getline(&ptr_bonsai, &len, stdin)) != -1)
     {
-        scanf(" %c", &comando);
-        scanf(" %s", bonsai);
+        comando = ptr_bonsai[0];
+        ptr_bonsai++;
+        ptr_bonsai++;
+
+        printf("%s", ptr_bonsai);
 
         switch (comando)
         {
         case 'i':
-            inclui(&raiz, bonsai);
+            inclui(&raiz, ptr_bonsai);
             break;
         case 'b':
 
-            if (busca(&raiz, soma_entrada(bonsai)) != NULL)
+            if (busca(&raiz, soma_entrada(ptr_bonsai)) != NULL)
             {
                 printf("Encontrado");
             }
             break;
         case 'r':
-            exclui((busca(&raiz, soma_entrada(bonsai))), &raiz);
+            exclui((busca(&raiz, soma_entrada(ptr_bonsai))), &raiz);
             break;
         }
-
-    } while (comando != 'f');
+    }
 
     return 0;
 }

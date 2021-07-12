@@ -49,7 +49,7 @@ struct tNo_B *montaarvore_B(const char *str)
     while (str[i] == ')' || str[i] == '(') /* pra passar para o proximo numero na string, nao parentese */
         i++;
 
-    while (str[i] != '\0')
+    while (str[i] != '\n')
     {
         inclui_B(raiz, chars_para_int(str, &i));
 
