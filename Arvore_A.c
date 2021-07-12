@@ -46,16 +46,17 @@ struct tNo_B *montaarvore_B(const char *str)
     struct tNo_B *raiz = NULL;
     int i = 1; /* o "0" seria o primeiro "(" */
     raiz = inclui_B(NULL, chars_para_int(str, &i));
-    while(str[i] == ')' || str[i] == '(') /* pra passar para o proximo numero na string, nao parentese */
-            i++;
+    while (str[i] == ')' || str[i] == '(') /* pra passar para o proximo numero na string, nao parentese */
+        i++;
 
     while (str[i] != '\0')
     {
         inclui_B(raiz, chars_para_int(str, &i));
 
-        while(str[i] == ')' || str[i] == '(')
+        while (str[i] == ')' || str[i] == '(')
             i++;
     }
+
     return raiz;
 }
 
@@ -102,6 +103,7 @@ struct tNo_A *inclui(struct tNo_A *no, char *bonsai)
 {
     if (no == NULL)
         return criaNo(montaarvore_B(bonsai));
+
     if (soma_entrada(bonsai) < soma_arvore(no->chave)) /* se a arvore sendo incluida tiver soma menor que a arvore no no atual */
     {
         no->esq = inclui(no->esq, bonsai);
@@ -113,21 +115,6 @@ struct tNo_A *inclui(struct tNo_A *no, char *bonsai)
         no->dir->pai = no;
     }
     return no;
-}
-
-int token_to_num(const char *str, int *indice)
-{
-    char token[100];
-    int i = 0;
-    while (str[*indice] != '\0' && str[*indice] != ' ')
-    {
-        token[i] = str[*indice];
-        i++;
-        (*indice)++;
-    }
-    token[i] = '\0';
-    (*indice)++;
-    return atoi(token);
 }
 
 struct tNo_A *montaarvore(char *str)
@@ -144,6 +131,7 @@ struct tNo_A *montaarvore(char *str)
 
 struct tNo_A *busca(struct tNo_A *no, int chave)
 {
+
     if (no == NULL)
         return NULL;
 

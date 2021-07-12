@@ -4,36 +4,34 @@
 
 int main(void)
 {
-    struct tNo_A *raiz = NULL;
-    char entrada[] = "\0";
+    struct tNo_A raiz;
 
     char comando;
     char bonsai[100];
-    char continuar = 'y';
 
-    while (continuar == 'y')
-    { /* na verdade, tem que dar um jeito disso ler um arquivo ate o final */
-        printf("Digite o comando para árvore: ");
+    do
+    {
         scanf(" %c", &comando);
-        printf("digite a árvore chave: ");
         scanf(" %s", bonsai);
 
         switch (comando)
         {
         case 'i':
-            inclui(raiz, bonsai);
+            inclui(&raiz, bonsai);
             break;
         case 'b':
-            busca(raiz, soma_entrada(bonsai));
+
+            if (busca(&raiz, soma_entrada(bonsai)) != NULL)
+            {
+                printf("Encontrado");
+            }
             break;
         case 'r':
-            exclui((busca(raiz, soma_entrada(bonsai))), raiz);
+            exclui((busca(&raiz, soma_entrada(bonsai))), &raiz);
             break;
         }
-        printf("continuar? (y/n): ");
-        scanf(" %c", &continuar);
-    }
-    /*emordem(raiz);*/
+
+    } while (comando != 'f');
 
     return 0;
 }
