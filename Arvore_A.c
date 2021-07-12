@@ -18,12 +18,10 @@ struct tNo_B *inclui_B(struct tNo_B *no, int c)
     if (c < no->chave)
     {
         no->esq = inclui_B(no->esq, c);
-        /* no->esq->pai = no; */
     }
     else
     {
         no->dir = inclui_B(no->dir, c);
-        /* no->dir->pai = no; */
     }
     return no;
 }
@@ -115,18 +113,6 @@ struct tNo_A *inclui(struct tNo_A *no, char *bonsai)
         no->dir->pai = no;
     }
     return no;
-}
-
-struct tNo_A *montaarvore(char *str)
-{
-    struct tNo_A *raiz = NULL;
-    int i = 0;
-    raiz = inclui(NULL, str);
-    while (str[i] != '\0')
-    {
-        inclui(raiz, str);
-    }
-    return raiz;
 }
 
 struct tNo_A *busca(struct tNo_A *no, int chave)

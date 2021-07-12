@@ -4,34 +4,31 @@
 
 int main(void)
 {
-    struct tNo_A raiz;
+    struct tNo_A *raiz = NULL;
 
-    char comando;
     char bonsai[100];
+    char comando;
+    char *ptr_bonsai;
 
-    do
+    size_t len;
+    size_t read;
+
+    ptr_bonsai = bonsai;
+    len = 100;
+
+    while ((read = getline(&ptr_bonsai, &len, stdin)) != -1)
     {
-        scanf(" %c", &comando);
-        scanf(" %s", bonsai);
+        comando = ptr_bonsai[0];
 
-        switch (comando)
+        ptr_bonsai++;
+        ptr_bonsai++;
+
+        if (comando == 105)
         {
-        case 'i':
-            inclui(&raiz, bonsai);
-            break;
-        case 'b':
-
-            if (busca(&raiz, soma_entrada(bonsai)) != NULL)
-            {
-                printf("Encontrado");
-            }
-            break;
-        case 'r':
-            exclui((busca(&raiz, soma_entrada(bonsai))), &raiz);
-            break;
+            printf("entrou");
+            inclui(raiz, ptr_bonsai);
         }
-
-    } while (comando != 'f');
+    }
 
     return 0;
 }
