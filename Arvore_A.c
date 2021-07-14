@@ -86,6 +86,11 @@ int soma_entrada(char *bonsai)
     return soma;
 }
 
+void inicia_raiz(struct tNo_A *raiz)
+{
+    raiz = NULL;
+}
+
 struct tNo_A *criaNo(struct tNo_B *chave)
 {
     struct tNo_A *n = (struct tNo_A *)malloc(sizeof(struct tNo_A));

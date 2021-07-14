@@ -13,6 +13,8 @@ int main(void)
 
     ptr_bonsai = bonsai;
 
+    inicia_raiz(&raiz);
+
     while ((getline(&ptr_bonsai, &len, stdin)) != -1)
     {
         comando = ptr_bonsai[0];
