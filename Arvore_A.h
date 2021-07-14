@@ -22,8 +22,6 @@ int soma_arvore(struct tNo_B *no);
 
 int soma_entrada(char *bonsai);
 
-void inicia_raiz(struct tNo_A *raiz);
-
 struct tNo_A *criaNo(struct tNo_B *chave);
 
 struct tNo_A *inclui(struct tNo_A *no, char *bonsai);

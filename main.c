@@ -4,7 +4,7 @@
 
 int main(void)
 {
-    struct tNo_A raiz;
+    struct tNo_A *raiz = NULL;
 
     char comando;
     char bonsai[100];
@@ -12,8 +12,6 @@ int main(void)
     size_t len;
 
     ptr_bonsai = bonsai;
-
-    inicia_raiz(&raiz);
 
     while ((getline(&ptr_bonsai, &len, stdin)) != -1)
     {
@@ -26,17 +24,20 @@ int main(void)
         switch (comando)
         {
         case 'i':
-            inclui(&raiz, ptr_bonsai);
+            if(raiz == NULL) 
+                raiz = inclui(raiz, ptr_bonsai);
+            else
+                inclui(raiz, ptr_bonsai);
             break;
         case 'b':
 
-            if (busca(&raiz, soma_entrada(ptr_bonsai)) != NULL)
+            if (busca(raiz, soma_entrada(ptr_bonsai)) != NULL)
             {
-                printf("Encontrado");
+                printf("Encontrado\n");
             }
             break;
         case 'r':
-            exclui((busca(&raiz, soma_entrada(ptr_bonsai))), &raiz);
+            exclui((busca(raiz, soma_entrada(ptr_bonsai))), raiz);
             break;
         }
     }
