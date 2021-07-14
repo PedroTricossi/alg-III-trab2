@@ -90,7 +90,7 @@ struct tNo_A *criaNo(struct tNo_B *chave)
 {
     struct tNo_A *n = (struct tNo_A *)malloc(sizeof(struct tNo_A));
 
-    printf("soma da arvore: %d\n", soma_arvore(chave));
+    /*printf("soma da arvore: %d\n", soma_arvore(chave));*/
 
     n->chave = chave;
     n->esq = NULL;
@@ -129,11 +129,24 @@ struct tNo_A *montaarvore(char *str)
     return raiz;
 }
 
+void imprime_noh_A(struct tNo_B *no){
+    if(no == NULL)
+        return;
+
+    printf("(%d", no->chave);
+    imprime_noh_A(no->esq);
+    imprime_noh_A(no->dir);
+    printf(")");
+    return;
+}
+
 struct tNo_A *busca(struct tNo_A *no, int chave)
 {
-
     if (no == NULL)
         return NULL;
+
+    imprime_noh_A(no->chave);
+    printf(" : %d\n", soma_arvore(no->chave));
 
     if (soma_arvore(no->chave) == chave)
         return no;
@@ -209,4 +222,32 @@ struct tNo_A *exclui(struct tNo_A *no, struct tNo_A *raiz)
         }
     }
     return novaRaiz;
+}
+
+void imprime_arvore_A(struct tNo_A *no){
+    if(no->pai == NULL)
+        printf("[");
+
+    printf("[");
+
+    imprime_noh_A(no->chave);
+    printf(" : %d\n", soma_arvore(no->chave));
+
+    if(no->esq != NULL)
+        imprime_arvore_A(no->esq);
+    else if(no->dir != NULL)
+        printf("[\n]\n");
+
+    if(no->dir != NULL)    
+        imprime_arvore_A(no->dir);
+    else if(no->esq != NULL)
+        printf("[\n]\n"); 
+
+    if(no->pai == NULL)
+        return;
+
+    if(no->esq != NULL && no->dir != NULL)
+        printf("]");
+    else
+        printf("]\n");
 }

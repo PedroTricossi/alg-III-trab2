@@ -30,6 +30,8 @@ int token_to_num(const char *str, int *indice);
 
 struct tNo_A *montaarvore(char *str);
 
+void imprime_noh_A(struct tNo_B *no);
+
 struct tNo_A *busca(struct tNo_A *no, int chave);
 
 struct tNo_A *min(struct tNo_A *no);
@@ -39,3 +41,5 @@ struct tNo_A *sucessor(struct tNo_A *no);
 void ajustaNoPai(struct tNo_A *no, struct tNo_A *novo);
 
 struct tNo_A *exclui(struct tNo_A *no, struct tNo_A *raiz);
+
+void imprime_arvore_A(struct tNo_A *no);

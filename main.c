@@ -28,6 +28,7 @@ int main(void)
                 raiz = inclui(raiz, ptr_bonsai);
             else
                 inclui(raiz, ptr_bonsai);
+            imprime_arvore_A(raiz);
             break;
         case 'b':
 
@@ -35,9 +36,11 @@ int main(void)
             {
                 printf("Encontrado\n");
             }
+            else printf("nao encontrado\n");
             break;
         case 'r':
             exclui((busca(raiz, soma_entrada(ptr_bonsai))), raiz);
+            imprime_arvore_A(raiz);
             break;
         }
     }
