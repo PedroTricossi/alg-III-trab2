@@ -42,4 +42,6 @@ void ajustaNoPai(struct tNo_A *no, struct tNo_A *novo);
 
 struct tNo_A *exclui(struct tNo_A *no, struct tNo_A *raiz);
 
+void imprime_busca(struct tNo_A *no);
+
 void imprime_arvore_A(struct tNo_A *no);

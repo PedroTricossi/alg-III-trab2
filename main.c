@@ -4,7 +4,7 @@
 
 int main(void)
 {
-    struct tNo_A *raiz = NULL;
+    struct tNo_A *raiz, *no_busca = NULL;
 
     char comando;
     char bonsai[100];
@@ -34,7 +34,9 @@ int main(void)
 
         case 'b':
 
-            busca(raiz, soma_entrada(ptr_bonsai));
+            no_busca = busca(raiz, soma_entrada(ptr_bonsai));
+
+            imprime_busca(no_busca);
 
             break;
 
@@ -42,6 +44,8 @@ int main(void)
 
             exclui((busca(raiz, soma_entrada(ptr_bonsai))), raiz);
             imprime_arvore_A(raiz);
+
+            printf("-----------------------------------------------------------------------------\n");
 
             break;
         }

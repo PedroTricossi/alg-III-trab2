@@ -146,9 +146,6 @@ struct tNo_A *busca(struct tNo_A *no, int chave)
     if (no == NULL)
         return NULL;
 
-    imprime_noh_A(no->chave);
-    printf(" : %d\n", soma_arvore(no->chave));
-
     if (soma_arvore(no->chave) == chave)
         return no;
     if (chave < soma_arvore(no->chave))
@@ -223,6 +220,12 @@ struct tNo_A *exclui(struct tNo_A *no, struct tNo_A *raiz)
         }
     }
     return novaRaiz;
+}
+
+void imprime_busca(struct tNo_A *no)
+{
+    imprime_noh_A(no->chave);
+    printf(" : %d\n", soma_arvore(no->chave));
 }
 
 void imprime_arvore_A(struct tNo_A *no)
