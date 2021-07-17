@@ -129,8 +129,9 @@ struct tNo_A *montaarvore(char *str)
     return raiz;
 }
 
-void imprime_noh_A(struct tNo_B *no){
-    if(no == NULL)
+void imprime_noh_A(struct tNo_B *no)
+{
+    if (no == NULL)
         return;
 
     printf("(%d", no->chave);
@@ -224,8 +225,9 @@ struct tNo_A *exclui(struct tNo_A *no, struct tNo_A *raiz)
     return novaRaiz;
 }
 
-void imprime_arvore_A(struct tNo_A *no){
-    if(no->pai == NULL)
+void imprime_arvore_A(struct tNo_A *no)
+{
+    if (no->pai == NULL)
         printf("[");
 
     printf("[");
@@ -233,21 +235,24 @@ void imprime_arvore_A(struct tNo_A *no){
     imprime_noh_A(no->chave);
     printf(" : %d\n", soma_arvore(no->chave));
 
-    if(no->esq != NULL)
+    if (no->esq != NULL)
         imprime_arvore_A(no->esq);
-    else if(no->dir != NULL)
+    else if (no->dir != NULL)
         printf("[\n]\n");
 
-    if(no->dir != NULL)    
+    if (no->dir != NULL)
         imprime_arvore_A(no->dir);
-    else if(no->esq != NULL)
-        printf("[\n]\n"); 
+    else if (no->esq != NULL)
+        printf("[\n]\n");
 
-    if(no->pai == NULL)
-        return;
-
-    if(no->esq != NULL && no->dir != NULL)
+    if (no->esq != NULL && no->dir != NULL)
         printf("]");
     else
         printf("]\n");
+
+    if (no->pai == NULL)
+    {
+        printf("]\n");
+        return;
+    }
 }

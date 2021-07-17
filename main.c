@@ -19,28 +19,30 @@ int main(void)
         ptr_bonsai++;
         ptr_bonsai++;
 
-        printf("%s", ptr_bonsai);
-
         switch (comando)
         {
         case 'i':
-            if(raiz == NULL) 
+
+            if (raiz == NULL)
                 raiz = inclui(raiz, ptr_bonsai);
             else
                 inclui(raiz, ptr_bonsai);
             imprime_arvore_A(raiz);
+            printf("-----------------------------------------------------------------------------\n");
+
             break;
+
         case 'b':
 
-            if (busca(raiz, soma_entrada(ptr_bonsai)) != NULL)
-            {
-                printf("Encontrado\n");
-            }
-            else printf("nao encontrado\n");
+            busca(raiz, soma_entrada(ptr_bonsai));
+
             break;
+
         case 'r':
+
             exclui((busca(raiz, soma_entrada(ptr_bonsai))), raiz);
             imprime_arvore_A(raiz);
+
             break;
         }
     }
