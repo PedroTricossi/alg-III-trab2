@@ -26,13 +26,11 @@ struct tNo_A *criaNo(struct tNo_B *chave);
 
 struct tNo_A *inclui(struct tNo_A *no, char *bonsai);
 
-int token_to_num(const char *str, int *indice);
-
-struct tNo_A *montaarvore(char *str);
-
 void imprime_noh_A(struct tNo_B *no);
 
 struct tNo_A *busca(struct tNo_A *no, int chave);
+
+struct tNo_A *busca_silenciosa(struct tNo_A *no, int chave);
 
 struct tNo_A *min(struct tNo_A *no);
 
